@@ -4,7 +4,13 @@
     box-sizing: border-box;
     font-family:Arial, Helvetica, sans-serif;
 }
-
+/* Links*/
+a {
+    color: #000;
+    text-decoration: none;
+    transition: .5s;
+}
+/* Login section*/
 .login-section{
     background-color: #bebebe;
     margin: 0 auto;
@@ -12,7 +18,7 @@
     border-radius: 14px;
     width: 500px;
     padding: 70px 50px;
-    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.15)   
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.15);
 }
 .login-button:hover{
     background-color: #d6d5d5;
@@ -26,16 +32,25 @@
     border-radius: 10px;
     margin: 20px auto;
 }
-.homepage-background {
+.success-field{
+    background-color: #D4EDDA;
+    color: #40754C;
+    padding: 10px;
+    width: 90%;
+    border-radius: 10px;
+    margin: 20px 10px;
+}
+.login-background {
     display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
     flex-direction: column;
     background: linear-gradient(#778899, #ffffff);
+    justify-content: center;
+    align-items: center;
 }
 label {
     display: block;
+    margin-top: 10px;
 }
 input{
     width: 100%;
@@ -49,10 +64,55 @@ input{
     text-align: center;
     margin-bottom: 30px;
 }
+/*Sign up section*/
+.sign-up-section{
+    display: flex;
+    flex-direction: column;
+    background-color: #bebebe;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 14px;
+    width: 500px;
+    padding: 70px 50px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.15);
+}
+.signup-button:hover, .edit-button:hover{
+    background-color: #d6d5d5;
+    cursor: pointer;
+    transition: .25s;
+}
+/* homepage section*/
+.homepage-background {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background: linear-gradient(#778899, #ffffff);
+}
+/* subpage background*/
+.subpage-background {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background: linear-gradient(#778899, #ffffff);
+}
+/* top section*/
+.top-section{
+    padding: 10px;
+    border-bottom: 1 #000 solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px;
+    border-bottom: 1px rgba(5, 5, 5, 0.39) solid;
+}
+.top-section>h1{
+    font-size: 30px;
+}
+
 h1 {
     color: #030303;
 }
-a {
+.top-section>a {
     float: right;
     background-color: #4169E1;
     padding: 10px 15px;
@@ -60,9 +120,171 @@ a {
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.15);
     border: none;
     color: #fff;
-    text-decoration: none;
 }
 a:hover{
     background-color: #2654df;
     cursor: pointer;
+}
+
+@media screen and (min-width: 800px){
+
+    .top-section>h1{
+        font-size: 30px;
+    }
+}
+/* Employee Dashboard*/
+.wrapper{
+    display: flex;
+    width: 300px;
+    padding: 50px 0;
+    margin: 15px;
+    background: #fff;
+    border-radius: 8px;
+    flex-direction: column;
+    align-items: center;
+}
+.circular-progress{
+    position: relative;
+    height: 180px;
+    width: 180px;
+    border-radius: 50%;
+    background: conic-gradient(#114ccc 3.6deg, #ededed 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.circular-progress::before{
+    content: "";
+    position: absolute;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+.progress-value{
+    position: relative;
+    font-size: 30px;
+    font-weight: 500;
+    color:#114ccc;
+}
+.expenses-button{
+    background-color: #fff;
+    height: 100px;
+    width: 300px;
+    margin: 20px;
+    text-align: center;
+    border-radius: 8px;
+    padding-top: 30px;
+    margin: 80px 20px;
+}
+.budget-display{
+    background-color: #fff;
+    height: 100px;
+    width: 300px;
+    margin: 20px;
+    text-align: center;
+    padding-top: 20px;
+    border-radius: 8px;
+    margin: 80px 20px;
+}
+.budget-display h4 {
+    margin: 8px;
+}
+.pages-overview{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+/* Expenses page*/
+.homepage-background {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background: linear-gradient(#778899, #ffffff);
+}
+/*Admin Dashboard*/
+
+.user-lists>h4 {
+    display: flex;
+    font-size: 35px;
+    padding: 20px;
+    justify-content: left;
+}
+.create-btn {
+    float: right;
+    font-size: 18px;
+    background-color: #4169E1;
+    padding: 10px 15px;
+    border-radius: 14px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.15);
+    border: none;
+    color: #fff;
+    margin: 0 50px;
+}
+.user-table {
+    width: 50%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    overflow: scroll;
+}
+.expenses-table {
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    overflow: scroll;
+    margin: 40px;
+}
+.department-table{
+    width: 45%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    overflow: scroll;
+    margin: 40px;
+    float: right;
+}
+.user-table th, .user-table td, .expenses-table th, 
+.expenses-table td, .department-table th,
+.department-table td {
+    border: 1px solid #cecece;
+    padding: 10px;
+    text-align: left;
+}
+.user-table th, .expenses-table th, .department-table th {
+    background-color: #c4c1c1;
+}
+.user-table tbody tr:hover {
+    background-color: rgba(25, 108, 202, 0.281);
+}
+.btn-edit-user,.btn-delete-user{
+    display: inline-block;
+    padding: 8px 10px;
+    margin: 2px;
+    border-radius: 8px;
+    color: #fff;
+}
+.btn-delete-user {
+    background-color: #b63333;
+}
+.btn-delete-user:hover {
+    background-color: #992b2b;
+}
+.btn-edit-user {
+    background-color: #2dac49;
+}
+.btn-edit-user:hover{
+    background-color: #1f7732;
+}
+.back-btn {
+    font-size: 18px;
+    background-color: #b63333;
+    padding: 10px 15px;
+    border-radius: 14px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.15);
+    border: none;
+    color: #fff;
+    margin: 10px 70px;
+    align-self: flex-end;
+}
+.back-btn:hover {
+    background-color: #992b2b;
 }

@@ -6,7 +6,7 @@
     <link rel ="stylesheet" href="style.css"/>
     <title>Budget Tracker System</title>
 </head>
-<body class="homepage-background">
+<body class="login-background">
     
     <div class="login-section">
         <h2 class="title">Sign in to start your session</h2>
@@ -14,11 +14,11 @@
             <p class ="error-field"><?php echo $_GET['error']; ?></p>
         <?php }?>
         <form action="login.php" name="login-form" method="post">
-            <label for ="username">Username</label>
+            <label for ="uname">Username</label>
             <input type="text" id="uname" name ="uname"
             placeholder="Enter Username">
 
-            <label for = "password">Password</label>
+            <label for = "pword">Password</label>
             <input type="password" id="pword" name ="pword"
             placeholder="Enter Password">
             <input class="login-button" type="submit" value="Sign in">
