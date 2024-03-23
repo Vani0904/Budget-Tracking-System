@@ -65,8 +65,8 @@ if (isset($_SESSION['employee_id']) && isset($_SESSION['user_name'])) {
                                         ?>
                                         </td>
                                         <td>
-                                            <a href="account-edit.php?user-id=<?= $userColumn['employee_id']; ?>" class="btn-edit-user">Edit</a>
-                                            <a href="account-deletion.php?user-id=<?= $userColumn['employee_id']; ?>" class="btn-delete-user" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+                                            <a href="account-edit.php?user-id=<?= $userColumn['employee_id']; ?>" class="btn-edit">Edit</a>
+                                            <a href="account-deletion.php?user-id=<?= $userColumn['employee_id']; ?>" class="btn-delete" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
                                         </td>
                                     </tr>
                                     <?php
@@ -111,8 +111,8 @@ if (isset($_SESSION['employee_id']) && isset($_SESSION['user_name'])) {
                                         <td><?= $userColumn['department_expenses']; ?></td>
                                         <td><?= $userColumn['department_deadline']; ?></td>
                                         <td>
-                                            <a href="department-edit.php?id=<?= $userColumn['departmet_id']; ?>" class="btn-edit-user">Edit</a>
-                                            <a href="department-deletion.php?id=<?= $userColumn['department_id']; ?>" class="btn-delete-user" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+                                            <a href="department-edit.php?id=<?= $userColumn['department_id']; ?>" class="btn-edit">Edit</a>
+                                            <a href="department-deletion.php?id=<?= $userColumn['department_id']; ?>" class="btn-delete" onclick="return confirm('Are you sure you want to delete this department?')">Delete</a>
                                         </td>
                                     </tr>
                                     <?php

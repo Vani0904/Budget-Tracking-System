@@ -7,7 +7,7 @@
     <title>Budget Tracker System</title>
 </head>
 <body class="login-background">
-    
+    <h1>Budget Tracker</h1>
     <div class="login-section">
         <h2 class="title">Sign in to start your session</h2>
         <?php if (isset($_GET['error'])) { ?>

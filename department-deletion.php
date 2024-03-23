@@ -8,30 +8,30 @@
 </head>
 <body class="subpage-background">
 <div class="top-section">
-    <h1>Account Deletion</h1>
+    <h1>Department Deletion</h1>
 </div>
 
 <?php
     include("function.php");
     include("db_conn.php");
     
-    $paraResult = verifyID('user-id');
+    $paraResult = verifyID('department_id');
     if(is_numeric($paraResult)){
-        $userId = validateInput($conn, $paraResult);
+        $deptId = validateInput($conn, $paraResult);
 
-        $user = getById($conn,'department', $userId);
+        $dept = getByDeptId($conn,'department', $deptId);
         if($user['status'] == 200){
-            $userDelete = deleteQuery('department', $userId);
-            if($userDelete){
-                header("location: admin-home.php?success=User deleted successfully");
+            $deptDelete = deleteDeptQuery('department', $deptId);
+            if($deptDelete){
+                header("location: admin-home.php?success=Department deleted successfully");
             }else {
                 header("location: admin-home.php?error=Unknown error occurred");
             }
         }  else {
-            header("location: admin-home.php?$user[message]");
+            header("location: admin-home.php?$dept[message]");
         }
     } else {
-        header("location: admin-home.php?message=". urlencode($user['message']));
+        header("location: admin-home.php?message=". urlencode($dept['message']));
     }
 
 ?>

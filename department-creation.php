@@ -8,13 +8,13 @@
 </head>
 <body class="subpage-background">
 <div class="top-section">
-    <h1>Alter Account</h1>
+    <h1>Department Creation</h1>
 </div>
 
 <div class="sign-up-section">
     <form action="signup-check.php" name="login-form" method="post">
     
-    <h2 class="title">Edit Account</h2>
+    <h2 class="title">Create Account</h2>
 
     <?php if (isset($_GET['error'])) { ?>
         <p class ="error-field"><?php echo $_GET['error']; ?></p>
@@ -23,31 +23,17 @@
     <?php if (isset($_GET['success'])) { ?>
         <p class ="success-field"><?php echo $_GET['success']; ?></p>
     <?php }?>
-
-    <?php
-        include("db_conn.php");
-        include("function.php");
-        
-        $user = getByUsrId($conn, 'employee', verifyID('user-id'));
-        $paramResult = verifyID('user-id');
-        if(!is_numeric($paramResult)){
-            echo '<h5>'. $paramResult.'</h5>';
-            return false;
-        }
-        
-        
-    ?>
         <label for = "user-id"><strong>Staff ID</strong></label>
         <input type="text" id="user-id" name ="user-id"
-        placeholder="Enter Staff ID" value="<?= $user['data']['employee_id'] ; ?>" readonly>
+        placeholder="Enter Staff ID">
 
         <label for ="fname"><Strong>First name</strong></label>
         <input type="text" id="fname" name ="fname"
-        placeholder="Enter First Name" value="<?= $user['data']['first_name'] ; ?>">
+        placeholder="Enter First Name">
 
         <label for ="lname"><strong>Last name</strong></label>
         <input type="text" id="lname" name ="lname"
-        placeholder="Enter Last Name" value="<?= $user['data']['last_name'] ; ?>">
+        placeholder="Enter Last Name">
 
         <label for = "pword"><strong>Password</strong></label>
         <input type="password" id="pword" name ="passw"
@@ -55,18 +41,18 @@
 
         <label for = "department"><strong>Department</strong>(Employee)</label>
         <input type="text" id="department" name ="department"
-        placeholder="Enter Department" value="<?= $user['data']['department_id'] ; ?>">
+        placeholder="Enter Department">
 
         <label for ="role"><strong>Role</strong></label>
         <select id="role" name ="role">
-            <option value="1" <?= ($user['data']['isEmployee'] == 1) ? 'selected': ''; ?>>Employee</option>
-            <option value="0" <?= ($user['data']['isEmployee'] == 0) ? 'selected': '';  ?>>Admin</option>
+            <option value="1">Employee</option>
+            <option value="0">Admin</option>
         </select>
 
         <label><strong>Is Locked</strong></label>
-        <input type="checkbox" name="is_locked" <?= ($user['data']['isLocked'] == 0) ? '': 'checked'; ?>  style="width:30px;height:30px"/>
+        <input type="checkbox" name="is_locked" style="width:30px;height:30px"/>
 
-        <input class="edit-button" name="updateUser" type="submit" value="Update">
+        <input class="signup-button" name="createUser" type="submit" value="Register">
     </form>
     <a href="admin-home.php" class="back-btn">Back</a>
 <div>

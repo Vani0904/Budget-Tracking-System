@@ -8,7 +8,7 @@
 </head>
 <body class="subpage-background">
 <div class="top-section">
-    <h1>Alter Account</h1>
+    <h1>Alter Department</h1>
 </div>
 
 <div class="sign-up-section">
@@ -28,8 +28,8 @@
         include("db_conn.php");
         include("function.php");
         
-        $user = getById($conn, 'department', verifyID('user-id'));
-        $paramResult = verifyID('user-id');
+        $dept = getByDeptId($conn, 'department', verifyID('department-id'));
+        $paramResult = verifyID('department-id');
         if(!is_numeric($paramResult)){
             echo '<h5>'. $paramResult.'</h5>';
             return false;
@@ -37,36 +37,38 @@
         
         
     ?>
-        <label for = "user-id"><strong>Staff ID</strong></label>
-        <input type="text" id="user-id" name ="user-id"
-        placeholder="Enter Staff ID" value="<?= $user['data']['employee_id'] ; ?>" readonly>
+        <label for = "department-id"><strong>Department ID</strong></label>
+        <input type="text" id="department-id" name ="department-id"
+        placeholder="Enter Department ID" value="<?= $dept['data']['department_id'] ; ?>" readonly>
 
-        <label for ="fname"><Strong>First name</strong></label>
-        <input type="text" id="fname" name ="fname"
-        placeholder="Enter First Name" value="<?= $user['data']['first_name'] ; ?>">
+        <label for ="dname"><Strong>Department name</strong></label>
+        <input type="text" id="dname" name ="dname"
+        placeholder="Enter Department Name" value="<?= $dept['data']['department_name'] ; ?>">
 
-        <label for ="lname"><strong>Last name</strong></label>
-        <input type="text" id="lname" name ="lname"
-        placeholder="Enter Last Name" value="<?= $user['data']['last_name'] ; ?>">
+        <label for ="address-one"><strong>Address 1</strong></label>
+        <input type="text" id="address-one" name ="address-one"
+        placeholder="Enter Address">
 
-        <label for = "pword"><strong>Password</strong></label>
-        <input type="password" id="pword" name ="passw"
-        placeholder="Enter Password">
+        <label for = "address-two"><strong>Address 2</strong></label>
+        <input type="password" id="address-two" name ="address-two"
+        placeholder="Enter Address">
 
-        <label for = "department"><strong>Department</strong>(Employee)</label>
-        <input type="text" id="department" name ="department"
-        placeholder="Enter Department" value="<?= $user['data']['department_id'] ; ?>">
+        <label for = "post-code"><strong>Post Code</strong></label>
+        <input type="text" id="post-code" name ="post-code"
+        placeholder="Enter post code">
 
-        <label for ="role"><strong>Role</strong></label>
-        <select id="role" name ="role">
-            <option value="1" <?= ($user['data']['isEmployee'] == 1) ? 'selected': ''; ?>>Employee</option>
-            <option value="0" <?= ($user['data']['isEmployee'] == 0) ? 'selected': '';  ?>>Admin</option>
-        </select>
+        <label for = "department-budg"><strong>Department Budget</strong></label>
+        <input type="text" id="department-budg" name ="department-budg"
+        placeholder="Enter department budget" value="<?= $dept['data']['department_budget'] ; ?>">
 
-        <label><strong>Is Locked</strong></label>
-        <input type="checkbox" name="is_locked" <?= ($user['data']['isLocked'] == 0) ? '': 'checked'; ?>  style="width:30px;height:30px"/>
+        <label for = "department-exp"><strong>Department Expenses</strong></label>
+        <input type="text" id="department-exp" name ="department-exp"
+        placeholder="Enter department expenses" value="<?= $dept['data']['department_expenses'] ; ?>">
 
-        <input class="edit-button" name="updateUser" type="submit" value="Update">
+        <label for ="department-deadline"><strong>Department Deadline</strong></label>
+        <input type="date" id="department-deadline" name ="department-deadline" value="<?= $dept['data']['department_deadline'] ; ?>">
+
+        <input class="edit-button" name="updateDepartment" type="submit" value="Update">
     </form>
     <a href="admin-home.php" class="back-btn">Back</a>
 <div>

@@ -50,8 +50,10 @@ if (isset($_SESSION['employee_id']) && isset($_SESSION['user_name'])) {
     </div>
 </div>
 <div class="summary-row">
-    <h3>Expenses Overview<h3>
-<table class="expenses-table">
+    <div class="expense-ovw-header">
+        <h3>Expenses Overview<h3>
+    </div>
+<table class="expenses-table-sum">
         <thead>
             <tr>
                 <th>Expenses ID</th>
