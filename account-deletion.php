@@ -19,9 +19,9 @@
     if(is_numeric($paraResult)){
         $userId = validateInput($conn, $paraResult);
 
-        $user = getById($conn,'employee', $userId);
+        $user = getByUsrId($conn,'employee', $userId);
         if($user['status'] == 200){
-            $userDelete = deleteQuery('employee', $userId);
+            $userDelete = deleteUsrQuery('employee', $userId);
             if($userDelete){
                 header("location: admin-home.php?success=User deleted successfully");
             }else {
