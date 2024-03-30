@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel ="stylesheet" href="style.css"/>
-    <title>Account Creation</title>
+    <title>Department Creation</title>
 </head>
 <body class="subpage-background">
 <div class="top-section">
@@ -12,9 +12,9 @@
 </div>
 
 <div class="sign-up-section">
-    <form action="signup-check.php" name="login-form" method="post">
+    <form action="dept-check.php" name="department-form" method="post">
     
-    <h2 class="title">Create Account</h2>
+    <h2 class="title">Create Department</h2>
 
     <?php if (isset($_GET['error'])) { ?>
         <p class ="error-field"><?php echo $_GET['error']; ?></p>
@@ -23,36 +23,34 @@
     <?php if (isset($_GET['success'])) { ?>
         <p class ="success-field"><?php echo $_GET['success']; ?></p>
     <?php }?>
-        <label for = "user-id"><strong>Staff ID</strong></label>
-        <input type="text" id="user-id" name ="user-id"
-        placeholder="Enter Staff ID">
+    <label for = "department-id"><strong>Department ID</strong></label>
+        <input type="text" id="department-id" name ="department-id"
+        placeholder="Enter Department ID">
 
-        <label for ="fname"><Strong>First name</strong></label>
-        <input type="text" id="fname" name ="fname"
-        placeholder="Enter First Name">
+        <label for ="dname"><Strong>Department name</strong></label>
+        <input type="text" id="dname" name ="dname"
+        placeholder="Enter Department Name">
 
-        <label for ="lname"><strong>Last name</strong></label>
-        <input type="text" id="lname" name ="lname"
-        placeholder="Enter Last Name">
+        <label for ="address-one"><strong>Address 1</strong></label>
+        <input type="text" id="address-one" name ="address-one"
+        placeholder="Enter Address">
 
-        <label for = "pword"><strong>Password</strong></label>
-        <input type="password" id="pword" name ="passw"
-        placeholder="Enter Password">
+        <label for = "address-two"><strong>Address 2</strong></label>
+        <input type="text" id="address-two" name ="address-two"
+        placeholder="Enter Address">
 
-        <label for = "department"><strong>Department</strong>(Employee)</label>
-        <input type="text" id="department" name ="department"
-        placeholder="Enter Department">
+        <label for = "post-code"><strong>Post Code</strong></label>
+        <input type="text" id="post-code" name ="post-code"
+        placeholder="Enter post code">
 
-        <label for ="role"><strong>Role</strong></label>
-        <select id="role" name ="role">
-            <option value="1">Employee</option>
-            <option value="0">Admin</option>
-        </select>
+        <label for = "department-budg"><strong>Department Budget</strong></label>
+        <input type="text" id="department-budg" name ="department-budg"
+        placeholder="Enter department budget">
 
-        <label><strong>Is Locked</strong></label>
-        <input type="checkbox" name="is_locked" style="width:30px;height:30px"/>
+        <label for ="department-deadline"><strong>Department Deadline</strong></label>
+        <input type="date" id="department-deadline" name ="department-deadline">
 
-        <input class="signup-button" name="createUser" type="submit" value="Register">
+        <input class="signup-button" name="createDept" type="submit" value="Create">
     </form>
     <a href="admin-home.php" class="back-btn">Back</a>
 <div>

@@ -25,13 +25,12 @@ include "db_conn.php";
             
             $sql = "SELECT * FROM employee WHERE user_name ='$uname' LIMIT 1";
 
-            $hashedPassword = $row['user_password'];
-
             $result = mysqli_query($conn, $sql);
             if ($result && mysqli_num_rows($result) === 1){
                 $row = mysqli_fetch_assoc($result);
 
                 $hashedPassword = $row['user_password'];
+
                 if (password_verify($pass,$hashedPassword)){
     
                     if($row['isLocked'] == 1) {

@@ -17,12 +17,6 @@ if (isset($_SESSION['employee_id']) && isset($_SESSION['user_name'])) {
     <h1>Expenses Management</h1>
     
 </div>
-<div>
-    <a href="expense-creation.php" class="create-btn">Create Expense</a> 
-</div>
-<?php if (isset($_GET['success'])) { ?>
-    <p class ="success-field"><?php echo $_GET['success']; ?></p>
-<?php }?>
 <table class="expenses-table">
                     <thead>
                         <tr>
@@ -30,7 +24,7 @@ if (isset($_SESSION['employee_id']) && isset($_SESSION['user_name'])) {
                             <th>Date Created</th>
                             <th>Amount</th>
                             <th>Comments</th>
-                            <th>Action</th>
+                            <th>Approval</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -41,21 +35,27 @@ if (isset($_SESSION['employee_id']) && isset($_SESSION['user_name'])) {
 
                             if(mysqli_num_rows($result) > 0)
                             {
-                                while($userColumn = mysqli_fetch_assoc($result))
+                                while($expense = mysqli_fetch_assoc($result))
                                 {
                                     ?>
                                     <tr>
-                                        <td><?= $userColumn['expenses_id']; ?></td>
-                                        <td><?= $userColumn['date_created']; ?></td>
-                                        <td><?= $userColumn['amount']; ?></td>
-                                        <td><?= $userColumn['comments']; ?></td>
+                                        <td><?= $expense['expenses_id']; ?></td>
+                                        <td><?= $expense['date_created']; ?></td>
+                                        <td><?= $expense['amount']; ?></td>
+                                        <td><?= $expense['comments']; ?></td>
                                         <td>
-                                            <a href="expense-edit.php?id=<?= $userColumn['expenses_id']; ?>" class="btn-edit">Edit</a>
-                                            <a href="expense-deletion.php?id=<?= $userColumn['expenses_id']; ?>" class="btn-delete" onclick="return confirm('Are you sure you want to delete this Expense?')">Delete</a>
+                                            <?php if ($expense['status'] != 1) :?>
+                                                <a href="expense-approval.php?id=<?= $expense['expenses_id']; ?>&action=approve" class="btn-approve">Approve</a>
+                                            <?php endif; ?>
+
+                                            <?php if ($expense['status'] == 1) :?>
+                                                <a href="expense-approval.php?id=<?= $expense['expenses_id']; ?>&action=reject" class="btn-reject">Reject</a>
+                                            <?php endif; ?>
+
                                         </td>
                                         <td>
                                         <?php
-                                           echo $userColumn['status'] == 1 ? 'Approved': '-';
+                                           echo $expense['status'] == 1 ? 'Approved': '-';
                                         ?>
                                         </td>
                                     </tr>
@@ -72,7 +72,7 @@ if (isset($_SESSION['employee_id']) && isset($_SESSION['user_name'])) {
                         
                     </tbody>
                 </table>
-                <a href="home.php" class="back-btn">Back</a>
+                <a href="admin-home.php" class="back-btn">Back</a>
             </div>
         </div>
     </div>

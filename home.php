@@ -50,51 +50,83 @@ if (isset($_SESSION['employee_id']) && isset($_SESSION['user_name'])) {
     </div>
 </div>
 <div class="summary-row">
-    <div class="expense-ovw-header">
-        <h3>Expenses Overview<h3>
-    </div>
-<table class="expenses-table-sum">
-        <thead>
-            <tr>
-                <th>Expenses ID</th>
-                <th>Amount</th>
-                <th>Comments</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-                $query = "SELECT * FROM expenses";
-                $result = mysqli_query($conn, $query);
+    <div class="expenses-table-section">
+        <div class="expense-ovw-header">
+            <h3>Expenses Overview<h3>
+        </div>
+        <table class="expenses-table-sum">
+            <thead>
+                <tr>
+                    <th>Expenses ID</th>
+                    <th>Amount</th>
+                    <th>Comments</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $query = "SELECT * FROM expenses";
+                    $result = mysqli_query($conn, $query);
 
-                if(mysqli_num_rows($result) > 0)
-                {
-                    while($userColumn = mysqli_fetch_assoc($result))
+                    if(mysqli_num_rows($result) > 0)
                     {
+                        while($expenses = mysqli_fetch_assoc($result))
+                        {
+                            ?>
+                            <tr>
+                                <td><?= $expenses['expenses_id']; ?></td>
+                                <td><?= $expenses['amount']; ?></td>
+                                <td><?= $expenses['comments']; ?></td>
+                                <td>
+                                <?php
+                                    echo $expenses['status'] == 1 ? 'Approved': '-';
+                                ?>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    } else {
                         ?>
                         <tr>
-                            <td><?= $userColumn['expenses_id']; ?></td>
-                            <td><?= $userColumn['amount']; ?></td>
-                            <td><?= $userColumn['comments']; ?></td>
-                            <td>
-                            <?php
-                                echo $userColumn['status'] == 1 ? 'Approved': '-';
-                            ?>
-                            </td>
+                            <td colspan="4"> No Record Found</td>
                         </tr>
                         <?php
                     }
-                } else {
-                    ?>
-                    <tr>
-                        <td colspan="4"> No Record Found</td>
-                    </tr>
-                    <?php
-                }
-            ?>
-        </tbody>
-    </table>
-   <!-- <h3>Recent Activites<h3> -->
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <div class="recent-activity-section">
+        <h3>Recent Activites<h3>
+        <table class="recent-activity-table">
+            <tbody>
+                <?php
+                    $query = "SELECT * FROM recentactivites";
+                    $result = mysqli_query($conn, $query);
+
+                    if(mysqli_num_rows($result) > 0)
+                    {
+                        while($recentActivity = mysqli_fetch_assoc($result))
+                        {
+                            ?>
+                            <tr>
+                                <td><?= $recentActivity['recent_type']; ?></td>
+                                <td><?= $recentActivity['recent_description']; ?></td>
+                                <td><?= $recentActivity['timestamp']; ?></td>
+                            </tr>
+                            <?php
+                        }
+                    } else {
+                        ?>
+                        <tr>
+                            <td colspan="3"> No New Activity</td>
+                        </tr>
+                        <?php
+                    }
+                ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 <script>
     let circularProgress = document.querySelector(".circular-progress"),

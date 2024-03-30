@@ -134,16 +134,16 @@ include "db_conn.php";
             exit();
         } else {
 
-                $sql_update = "UPDATE employee SET 
-                                            user_name='$username',
-                                            first_name='$fname',
-                                            last_name='$lname', 
-                                            department_id=". ($department === null ? "NULL" : "'$department'"). ",
-                                            isEmployee=$role,
-                                            isLocked=$isLocked";
+            $sql_update = "UPDATE employee SET 
+                user_name='$username',
+                first_name='$fname',
+                last_name='$lname', 
+                department_id=". ($department === null ? "NULL" : "'$department'"). ",
+                isEmployee=$role,
+                isLocked=$isLocked";
 
-                    $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
-                    $sql_update .=", user_password='$hashed_password'";
+                $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
+                $sql_update .=", user_password='$hashed_password'";
                 }
                  $sql_update .= " WHERE employee_id=$userid";
                             
@@ -155,7 +155,8 @@ include "db_conn.php";
                     header("Location: account-edit.php?error=unknown error occurred&$user_data");
                     exit();
                 }
-            } else{
+            }
+             else{
         header("Location: account-creation.php");
         exit();
     }

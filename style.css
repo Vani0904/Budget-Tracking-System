@@ -14,7 +14,7 @@ a {
 
 .login-section{
     background-color: #bebebe;
-    margin: 0 auto;
+    margin: 10px auto;
     padding: 20px;
     border-radius: 14px;
     width: 500px;
@@ -168,6 +168,10 @@ a:hover{
     font-weight: 500;
     color:#114ccc;
 }
+.summary-row{
+    display: flex;
+    justify-content: center;
+}
 .expenses-button{
     background-color: #fff;
     height: 100px;
@@ -196,6 +200,15 @@ a:hover{
     flex-direction: row;
     justify-content: center;
 }
+.recent-activity-section{
+    background-color: #e9e6e6;
+    padding: 20px;
+    margin-left: 20px;
+    border-radius: 5px;
+    width: 600px;
+    max-width: 800px;
+    max-height: 550px;
+}
 /* Expenses page*/
 .homepage-background {
     display: flex;
@@ -222,11 +235,34 @@ a:hover{
     color: #fff;
     margin: 0 50px;
 }
+.btn-approve{
+    background-color: #2dac49;
+    padding: 7px;
+    border:1px solid #40754C;
+    margin: 2px;
+    border-radius: 3px;
+}
+.btn-approve:hover{
+    background-color:#1f7732;
+}
+.btn-reject{
+    background-color: #c94c4c;
+    padding: 7px;
+    border:1px solid #732B2B;
+    border-radius: 3px;
+
+}
+.btn-reject:hover{
+    background-color: #bd2424;
+}
 .user-table {
-    width: 50%;
+    width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
     overflow: scroll;
+}
+.user-table-section {
+    width: 50%;
 }
 .expense-ovw-header {
     padding: 10px 0 0 50px;
@@ -238,20 +274,40 @@ a:hover{
     overflow: scroll;
     margin: 40px;
 }
-.expenses-table-sum {
+.expenses-table-adm{
     width: 40%;
     border-collapse: collapse;
     margin-top: 15px;
     overflow: scroll;
     margin: 40px;
 }
-.expenses-table-sum td{
+.recent-activity-table {
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    margin: 40px;
+}
+.expenses-table-sum{
+    border-collapse: collapse;
+    overflow: scroll;
+    margin: 40px;
+}
+.nav-btns {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 5px;
+}
+.tables {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.expenses-table-sum td, .recent-activity-table td{
     font-weight: lighter;
 }
 .department-table{
-    width: 45%;
+    width: 80%;
     border-collapse: collapse;
-    margin-top: 15px;
     overflow: scroll;
     margin: 40px;
     float: right;
@@ -260,18 +316,30 @@ a:hover{
     font-weight:lighter;
 }
 .user-table th, .user-table td, .expenses-table th, 
-.expenses-table td, .expenses-table-sum th, .expenses-table-sum td, 
+.expenses-table td, .expenses-table-adm th,.expenses-table-adm td, .expenses-table-sum th, .expenses-table-sum td, 
 .department-table th,
-.department-table td {
+.department-table td{
     border: 1px solid #cecece;
     padding: 10px;
     text-align: left;
 }
-.user-table th, .expenses-table th, .department-table th, .expenses-table-sum th {
+.recent-activity-table th, .recent-activity-table td {
+    border: 1px solid #e9e6e6;
+    padding: 10px;
+    text-align: left;
+}
+.user-table th, .expenses-table th, .department-table th, 
+.expenses-table-sum th, .recent-activity-table th,
+.expenses-table-adm th {
     background-color: #c4c1c1;
 }
 .user-table tbody tr:hover {
     background-color: rgba(25, 108, 202, 0.281);
+}
+.col-de2{
+    display: flex;
+    flex-direction: column;
+    float: right;
 }
 .btn-edit-user,.btn-delete-user{
     display: inline-block;
