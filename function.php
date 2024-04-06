@@ -178,7 +178,6 @@
                     mysqli_stmt_bind_param($stmt, "ii", $expense_id, $department_id);
                     $update_result = mysqli_stmt_execute($stmt);
                     mysqli_stmt_close($stmt);
-                    return $update_result;
 
                     if ($update_result){
                         $insert_query = "INSERT INTO recentactivities (department_id, activity_type, activity_description) VALUES (?,?,?)";
@@ -224,7 +223,6 @@
                     mysqli_stmt_bind_param($stmt, "ii", $expense_id, $department_id);
                     $update_result = mysqli_stmt_execute($stmt);
                     mysqli_stmt_close($stmt);
-                    return $update_result;
 
                     if ($update_result){
                         $insert_query = "INSERT INTO recentactivities (department_id, activity_type, activity_description) VALUES (?,?,?)";

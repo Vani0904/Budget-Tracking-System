@@ -2,6 +2,19 @@
 session_start();
 include "db_conn.php";
 if (isset($_SESSION['employee_id']) && isset($_SESSION['user_name'])) {
+    $departmentId = isset($_SESSION['department_id']) ? $_SESSION['department_id'] : 0;
+
+    $sql = "SELECT department_expenses, department_budget FROM department WHERE department_id = $departmentId";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result && mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+        $departmentExpenses = $row['department_expenses'];
+        $budget = $row['department_budget'];
+    } else {
+        $departmentExpenses = 0;
+        $budget = 0;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +49,8 @@ if (isset($_SESSION['employee_id']) && isset($_SESSION['user_name'])) {
                     </thead>
                     <tbody>
                         <?php
-                            $query = "SELECT * FROM expenses";
+                            $query = "SELECT expenses.* FROM expenses INNER JOIN department_expenses
+                            department_expenses ON expenses.expenses_id = department_expenses.expenses_id WHERE department_expenses.department_id = $departmentId";
                             $result = mysqli_query($conn, $query);
 
                             if(mysqli_num_rows($result) > 0)

@@ -65,7 +65,8 @@ if (isset($_SESSION['employee_id']) && isset($_SESSION['user_name'])) {
             </thead>
             <tbody>
                 <?php
-                    $query = "SELECT * FROM expenses";
+                    $query = "SELECT expenses.* FROM expenses INNER JOIN department_expenses
+                    department_expenses ON expenses.expenses_id = department_expenses.expenses_id WHERE department_expenses.department_id = $departmentId";
                     $result = mysqli_query($conn, $query);
 
                     if(mysqli_num_rows($result) > 0)
@@ -101,7 +102,7 @@ if (isset($_SESSION['employee_id']) && isset($_SESSION['user_name'])) {
         <table class="recent-activity-table">
             <tbody>
                 <?php
-                    $query = "SELECT * FROM recentactivites";
+                    $query = "SELECT * FROM recentactivities WHERE department_id = $departmentId";
                     $result = mysqli_query($conn, $query);
 
                     if(mysqli_num_rows($result) > 0)
@@ -110,8 +111,8 @@ if (isset($_SESSION['employee_id']) && isset($_SESSION['user_name'])) {
                         {
                             ?>
                             <tr>
-                                <td><?= $recentActivity['recent_type']; ?></td>
-                                <td><?= $recentActivity['recent_description']; ?></td>
+                                <td><?= $recentActivity['activity_type']; ?></td>
+                                <td><?= $recentActivity['activity_description']; ?></td>
                                 <td><?= $recentActivity['timestamp']; ?></td>
                             </tr>
                             <?php
