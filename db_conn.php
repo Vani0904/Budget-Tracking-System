@@ -4,7 +4,7 @@
     $uname = "root";
     $password = "";
 
-    $db_name = "bt_schema";
+    $db_name = "bt_schema1";
 
     $conn = mysqli_connect( $sname,$uname,$password,$db_name);
     if (!$conn) {

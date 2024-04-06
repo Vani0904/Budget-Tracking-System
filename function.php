@@ -163,4 +163,106 @@
 
             return $activities;
         }
+        function approveExpense($conn, $expense_id) {
+            $query = "UPDATE expenses SET status = 1 WHERE expenses_id = ?";
+            $stmt = mysqli_prepare($conn, $query);
+            mysqli_stmt_bind_param($stmt, "i", $expense_id);
+            $result = mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+        
+            if ($result) {
+                $department_id = getDepartmentId($conn, $expense_id);
+                if ($department_id !== null) {
+                    $update_query = "UPDATE department SET department_expenses = department_expenses + (SELECT amount FROM expenses WHERE expenses_id = ?) WHERE department_id = ?";
+                    $stmt = mysqli_prepare($conn, $update_query);
+                    mysqli_stmt_bind_param($stmt, "ii", $expense_id, $department_id);
+                    $update_result = mysqli_stmt_execute($stmt);
+                    mysqli_stmt_close($stmt);
+                    return $update_result;
+
+                    if ($update_result){
+                        $insert_query = "INSERT INTO recentactivities (department_id, activity_type, activity_description) VALUES (?,?,?)";
+                        $stmt = mysqli_prepare($conn, $insert_query);
+                        $type = "Expense Approved";
+                        $description = "Exepnse ID $expense_id was approved";
+                        mysqli_stmt_bind_param($stmt, "iss", $department_id, $type, $description);
+                        $insert_result = mysqli_stmt_execute($stmt);
+                        mysqli_stmt_close($stmt);
+
+                        if ($insert_result){
+                            return true;
+                        } else {
+                            echo "Error inserting recent activity: ". mysqli_error($conn);
+                            return false;
+                        }
+                    } else {
+                       echo "Error updating department expenses: ". mysqli_error($conn);
+                       return false;
+                    }
+                } else {
+                    echo "Department ID not found for the approved expense";
+                    return false;
+                }
+            } else {
+                echo "Error approving expense: " . mysqli_error($conn);
+                return false;
+            }
+        }
+        
+        function rejectExpense($conn, $expense_id) {
+            $query = "UPDATE expenses SET status = 0 WHERE expenses_id = ?";
+            $stmt = mysqli_prepare($conn, $query);
+            mysqli_stmt_bind_param($stmt, "i", $expense_id);
+            $result = mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+        
+            if ($result) {
+                $department_id = getDepartmentId($conn, $expense_id);
+                if ($department_id !== null) {
+                    $update_query = "UPDATE department SET department_expenses = department_expenses - (SELECT amount FROM expenses WHERE expenses_id = ?) WHERE department_id = ?";
+                    $stmt = mysqli_prepare($conn, $update_query);
+                    mysqli_stmt_bind_param($stmt, "ii", $expense_id, $department_id);
+                    $update_result = mysqli_stmt_execute($stmt);
+                    mysqli_stmt_close($stmt);
+                    return $update_result;
+
+                    if ($update_result){
+                        $insert_query = "INSERT INTO recentactivities (department_id, activity_type, activity_description) VALUES (?,?,?)";
+                        $stmt = mysqli_prepare($conn, $insert_query);
+                        $type = "Expense Rejected";
+                        $description = "Exepnse ID $expense_id was rejected";
+                        mysqli_stmt_bind_param($stmt, "iss", $department_id, $type, $description);
+                        $insert_result = mysqli_stmt_execute($stmt);
+                        mysqli_stmt_close($stmt);
+
+                        if ($insert_result){
+                            return true;
+                        } else {
+                            echo "Error inserting recent activity: ". mysqli_error($conn);
+                            return false;
+                        }
+                    } else {
+                       echo "Error updating department expenses: ". mysqli_error($conn);
+                       return false;
+                    }
+                } else {
+                    echo "Department ID not found for the rejected expense";
+                    return false;
+                }
+            } else {
+                echo "Error rejecting expense: " . mysqli_error($conn);
+                return false;
+            }
+        }
+        
+        function getDepartmentId($conn, $expense_id) {
+            $query = "SELECT department_id FROM department_expenses WHERE expenses_id = ?";
+            $stmt = mysqli_prepare($conn, $query);
+            mysqli_stmt_bind_param($stmt, "i", $expense_id);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_bind_result($stmt, $department_id);
+            mysqli_stmt_fetch($stmt);
+            mysqli_stmt_close($stmt);
+            return $department_id;
+        }
 ?>
