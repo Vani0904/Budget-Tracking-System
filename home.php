@@ -129,43 +129,54 @@ if (isset($_SESSION['employee_id']) && isset($_SESSION['user_name'])) {
         </table>
     </div>
 </div>
-<script>
-    let circularProgress = document.querySelector(".circular-progress"),
-        progressValue = document.querySelector(".progress-value");
+    <script>
+        let circularProgress = document.querySelector(".circular-progress"),
+            progressValue = document.querySelector(".progress-value");
 
-    let departmentId = <?php echo $departmentId; ?>,
-    progressStartValue = 0,
-        progressEndValue = 100,
-        speed = 1000;
+        let departmentId = <?php echo $departmentId; ?>,
+        progressStartValue = 0,
+            progressEndValue = 100,
+            speed = 1000;
 
-    function fetchDepartmentBudget() {
-        fetch(`get-department-budget.php?department_id=${departmentId}`)
-            .then(response => response.text())
-            .then(data => {
-                let budget = parseFloat(data);
-                updateProgress(budget);
-            })
-            .catch(error => console.error('Error fetching department budget:', error));
-    }
-    function updateProgress(budget){
-        fetch(`get-department-expenses.php?department_id=${departmentId}`)
-            .then(response => response.text())
-            .then(data => {
-                let departmentExpenses = parseFloat(data);
-                let progressPercentage = (departmentExpenses / budget) * 100;
-                progressValue.textContent = `${Math.floor(progressPercentage)}%`;
-                circularProgress.style.background = `conic-gradient(#114ccc ${progressPercentage}deg, #ededed 0deg)`
-            })
-            .catch(error => console.error('Error fetching department budget:', error));
-        
-    }
-    let progress = setInterval(() => {
-        fetchDepartmentBudget();
-        if(progressStartValue == progressEndValue){
-            clearInterval(progress);
+        function fetchDepartmentBudget() {
+            fetch(`get-department-budget.php?department_id=${departmentId}`)
+                .then(response => response.text())
+                .then(data => {
+                    let budget = parseFloat(data);
+                    updateProgress(budget);
+                })
+                .catch(error => console.error('Error fetching department budget:', error));
         }
-    }, speed);
-</script>
+        function updateProgress(budget){
+            fetch(`get-department-expenses.php?department_id=${departmentId}`)
+                .then(response => response.text())
+                .then(data => {
+                    let departmentExpenses = parseFloat(data);
+                    let progressPercentageValue = (departmentExpenses / budget) * 100;
+                    progressPercentage = Math.floor(progressPercentageValue);
+                    if (progressPercentage >= 100){
+                        if(departmentExpenses === budget){
+                            progressValue.textContent = '100%';
+                            progressValue.style.color = '#15a33b';
+                            circularProgress.style.background = `conic-gradient(#15a33b 0deg, #15a33b 100%,  #ededed 0deg)`;
+                        } else {
+                            console.warn('Budget exceeded!');
+                        }
+                    } else{
+                        console.log("Progress Percentage:", progressPercentage);
+                    progressValue.textContent = `${Math.floor(progressPercentage)}%`;
+                    circularProgress.style.background = `conic-gradient(#114ccc ${progressPercentage * 3.6}deg, #ededed 0deg)`;
+         } })
+                .catch(error => console.error('Error fetching department budget:', error));
+            
+        }
+        let progress = setInterval(() => {
+            fetchDepartmentBudget();
+            if(progressStartValue == progressEndValue){
+                clearInterval(progress);
+            }
+        }, speed);
+    </script>
 </body>
 </html>
 

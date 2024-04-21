@@ -15,12 +15,12 @@
     include("function.php");
     include("db_conn.php");
     
-    $paraResult = verifyID('department_id');
+    $paraResult = verifyID('id');
     if(is_numeric($paraResult)){
         $deptId = validateInput($conn, $paraResult);
 
         $dept = getByDeptId($conn,'department', $deptId);
-        if($user['status'] == 200){
+        if($dept['status'] == 200){
             $deptDelete = deleteDeptQuery('department', $deptId);
             if($deptDelete){
                 header("location: admin-home.php?success=Department deleted successfully");

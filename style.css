@@ -149,7 +149,7 @@ a:hover{
     height: 180px;
     width: 180px;
     border-radius: 50%;
-    background: conic-gradient(#114ccc 3.6deg, #ededed 0deg);
+    background: conic-gradient(#114ccc 0deg, #ededed 0deg);
     display: flex;
     align-items: center;
     justify-content: center;

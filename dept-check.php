@@ -28,7 +28,7 @@ include "db_conn.php";
         
         //Checking the fields were correctly inputted 
         if (empty($departmentId)) {
-            header("Location: department-creation.php?error=Dpeartment ID is required&$dept_data");
+            header("Location: department-creation.php?error=Department ID is required&$dept_data");
             exit();
         } else if (empty($departmentName)){
             header("Location: department-creation.php?error=Department name is required&$dept_data");

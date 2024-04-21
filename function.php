@@ -121,7 +121,7 @@
             global $conn;
 
             $table = validateInput($conn,$tableName);
-            $userId = validateInput($conn,$deptId);
+            $deptId = validateInput($conn,$deptId);
 
             $query = "DELETE FROM $table WHERE department_id='$deptId' LIMIT 1";
             $result = mysqli_query($conn, $query);
@@ -131,7 +131,7 @@
             global $conn;
 
             $table = validateInput($conn,$tableName);
-            $userId = validateInput($conn,$expId);
+            $expId = validateInput($conn,$expId);
 
             $query = "DELETE FROM $table WHERE expenses_id='$expId' LIMIT 1";
             $result = mysqli_query($conn, $query);
@@ -183,7 +183,7 @@
                         $insert_query = "INSERT INTO recentactivities (department_id, activity_type, activity_description) VALUES (?,?,?)";
                         $stmt = mysqli_prepare($conn, $insert_query);
                         $type = "Expense Approved";
-                        $description = "Exepnse ID $expense_id was approved";
+                        $description = "Expense ID $expense_id was approved";
                         mysqli_stmt_bind_param($stmt, "iss", $department_id, $type, $description);
                         $insert_result = mysqli_stmt_execute($stmt);
                         mysqli_stmt_close($stmt);
@@ -228,7 +228,7 @@
                         $insert_query = "INSERT INTO recentactivities (department_id, activity_type, activity_description) VALUES (?,?,?)";
                         $stmt = mysqli_prepare($conn, $insert_query);
                         $type = "Expense Rejected";
-                        $description = "Exepnse ID $expense_id was rejected";
+                        $description = "Expense ID $expense_id was rejected";
                         mysqli_stmt_bind_param($stmt, "iss", $department_id, $type, $description);
                         $insert_result = mysqli_stmt_execute($stmt);
                         mysqli_stmt_close($stmt);
